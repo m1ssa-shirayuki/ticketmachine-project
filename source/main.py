@@ -20,6 +20,24 @@ def payment_process():
         total += 150 * buy[3]
         
     print(f'合計金額{total}円です。')
+    
+    while True:
+        balance = input('現金を投入してください。 >>> ')
+        # isdigitでマイナスを扱う際、Falseになってしまって文字列と負の数の判定ができないのでスライスを用いて負の数かどうかを判定
+        if balance[0] == '-':
+            print('金額は正の値でなければなりません。')
+        # 数値でない場合
+        elif not balance.isdigit():
+            print('金額は数値でなければなりません。')
+        # 合計金額に足りていない場合
+        elif int(balance) < total:
+            print('金額が不足しています。')
+        # 合計金額以上だった場合お釣りを返して終了
+        else:
+            balance = int(balance)
+            print(f'お釣り{balance - total}円です。')
+            break
+    
 
 print('券売機シミュレータ')
 buy = [0, 0, 0, 0]
