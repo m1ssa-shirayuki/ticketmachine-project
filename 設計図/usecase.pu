@@ -1,0 +1,44 @@
+@startuml CUI券売機シュミレーター
+    top to bottom direction
+    actor 利用者 as user
+    actor 管理者 as admin
+    rectangle 券売機 {
+        ' userの流れ
+        usecase 商品を選択する as US1
+        usecase お金を投入する as US2
+        usecase お釣りを受けとる as US3
+        ' 管理者の流れ
+        usecase 商品一覧を表示する as AD1
+        usecase 合計料金を表示する as AD2
+        usecase 料金を受け取る as AD3
+        'usecase (<u>不足を表示する<u>\nextention points\n料金が少ない場合) as AD3
+        usecase AD4 as "不足を表示する\n
+        ----
+        extention points\n料金が少ない場合"
+        usecase 商品一覧に戻す as AD5
+        usecase お釣りを出す as AD6
+    }
+    
+    rectangle 管理メニュー {
+        usecase 管理メニューを表示する as MA1
+        usecase 売上をリセットする as MA2
+        usecase 商品の価格を変更する as MA3
+        usecase 管理画面を終了する as MA4
+    }
+    
+    user --> US1
+    US1 ..> US2 : << include >>
+    US2 --> US3
+
+    admin --> AD1
+    AD1 ..> AD2 : << include >>
+    AD2 --> AD3
+    AD3 --> AD4
+    AD3 --> AD6
+    AD4 --> AD5
+    
+    admin --> MA1
+    MA1 <-- MA2
+    MA1 <-- MA3
+    MA1 <-- MA4
+@enduml
