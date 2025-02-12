@@ -1,0 +1,27 @@
+@startuml アクティビティ図m
+
+|ユーザー|
+start
+:商品一覧を表示;
+repeat
+    :商品番号を入力;
+    if (有効な商品番号?) then (yes)
+        :購入リストに追加;
+    else (no)
+        :エラーメッセージ表示;
+    endif
+repeat while (商品番号 != "c")
+
+:購入リストと合計金額を表示;
+:金額を入力;
+
+|券売機|
+if (金額が十分?) then (yes)
+    :支払い成功;
+    :おつり計算と表示;
+else (no)
+    :エラーメッセージ表示;
+endif
+
+stop
+@enduml
