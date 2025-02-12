@@ -1,0 +1,75 @@
+@startuml シーケンス図
+hide footbox
+actor ユーザー
+
+participant "ユーザーインターフェース" as UI
+participant "券売機" as TM
+participant "商品" as Item
+participant "支払い" as Payment
+
+== 商品選択 ==
+ユーザー -> UI: 購入可能な商品一覧を表示
+activate UI
+UI -> TM: 商品一覧の取得
+activate TM
+TM -> Item: 商品リストを取得
+activate Item
+Item -> TM: 商品リストを返す
+deactivate Item
+TM -> UI: 商品リストを表示
+deactivate TM
+UI -> ユーザー: 商品リストを表示
+deactivate UI
+
+== 商品番号入力 ==
+loop cが入力されるまで
+    ユーザー -> UI: 商品番号またはcを入力
+    activate UI
+    alt 商品番号が無効
+        UI -> ユーザー: 商品番号またはcを指定してください
+    else 商品番号が有効
+        UI -> TM: 商品選択を処理(item)
+        activate TM
+        TM -> Item: 価格を取得()
+        activate Item
+        Item -> TM: 価格を返す
+        deactivate Item
+        TM -> UI: 価格を表示(price)
+        deactivate TM
+        UI -> ユーザー: 価格を表示(price)
+    end
+    deactivate UI
+end
+
+== 金額投入 ==
+ユーザー -> UI: cを入力
+activate UI
+UI -> ユーザー: 購入する商品の一覧と金額の合計を表示
+
+UI -> ユーザー: 現金を投入してください
+ユーザー -> UI: 金額を投入(amount)
+activate UI
+UI -> TM: 支払い処理(amount)
+activate TM
+alt 金額が不足
+    TM -> UI: 金額が不足しています
+    deactivate TM
+    UI -> ユーザー: 金額が不足しています
+else 金額が無効
+    TM -> UI: 金額が無効です
+    deactivate TM
+    UI -> ユーザー: 金額が無効です
+else 支払い成功
+    TM -> Payment: 金額を確認(amount)
+    activate Payment
+    Payment -> TM: 支払い成功()
+    deactivate Payment
+    TM -> UI: レシートを表示、釣銭を返却
+    deactivate TM
+    UI -> ユーザー: レシートを表示、釣銭を返却
+end
+deactivate UI
+
+== トランザクション終了 ==
+ユーザー -> UI: トランザクションを終了
+@enduml
