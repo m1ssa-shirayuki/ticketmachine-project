@@ -89,7 +89,27 @@ while True:
                 buy = [0, 0, 0, 0]
                 print('売上をリセットしました。')
             elif int(manager_result) == 2:
-                pass
+                if buy == [0, 0, 0, 0]:
+                    goods = input('1.特製ラーメン\n2.醤油ラーメン\n3.塩ラーメン\n4.ごはん\n価格を変更する商品の番号を入力してください。 >>> ')
+                    if not goods.isdigit():
+                        print('正しい値を入力してください。')
+                    elif int(goods) > 4 or int(goods) < 1:
+                        print('値は1から4の間でなければなりません。')
+                    else:
+                        new_price = input('新しい価格を入力してください。 >>> ')
+                        if not new_price.isdigit():
+                            print('正しい値を入力してください。')
+                        else:
+                            ask = input('よろしいですか？ y or n')
+                            if ask != 'y' and ask != 'Y' and ask != 'n' and ask != 'N':
+                                print('どちらかを入力してください。')
+                            elif ask == 'y' or ask == 'Y':
+                                price[int(goods) - 1] = int(new_price)
+                                print('変更しました。')
+                            else:
+                                print('キャンセルしました。')
+                else:
+                    print('売上をリセットしてから実行してください。')
             else:
                 pass
                 # break
