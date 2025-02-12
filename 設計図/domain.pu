@@ -1,0 +1,32 @@
+@startuml domainmodel
+left to right direction
+
+hide circle
+hide method
+
+package DomainModel {
+
+class 券売機 {
+}
+
+class 画面 {
+  商品選択
+  支払い方法
+}
+
+class チケット {
+  種類
+  価格
+  日付
+}
+
+class 現金投入口 {
+  支払い
+}
+
+券売機 "1" --> "1" 画面 
+券売機 "1" --> "1" チケット 
+券売機 "1" --> "0..1" 現金投入口 
+}
+
+@enduml
