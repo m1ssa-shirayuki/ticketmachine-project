@@ -1,5 +1,3 @@
-import sys
-    
 price = [1000, 780, 880, 150]
 buy = [0, 0, 0, 0]
 cart = [0, 0, 0, 0]
@@ -29,7 +27,7 @@ def main(price, buy, cart):
     # 3が選ばれた時に終了
         else:
             print('終了が選ばれました。')
-            sys.exit()
+            break
     
 if __name__ == '__main__':
     main(price, buy, cart)
