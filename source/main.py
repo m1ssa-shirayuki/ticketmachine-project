@@ -111,8 +111,8 @@ while True:
                 else:
                     print('売上をリセットしてから実行してください。')
             else:
-                pass
-                # break
+                # pass
+                break
                 
 
 # 3が選ばれた時に終了
