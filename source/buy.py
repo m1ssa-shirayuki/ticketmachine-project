@@ -3,7 +3,7 @@ def buy_process(price, buy):
     total = 0
     cart = [0, 0, 0, 0]
     while True:
-        i = input(f'1.特製ラーメン {price[0]}円\n2.醤油ラーメン {price[1]}円\n3.塩ラーメン {price[2]}円\n4.ごはん {price[3]}円\n商品番号を入力してください。(cを入力すると会計)')
+        i = input(f'\n1.特製ラーメン {price[0]}円\n2.醤油ラーメン {price[1]}円\n3.塩ラーメン {price[2]}円\n4.ごはん {price[3]}円\n商品番号を入力してください。(cを入力すると会計) >>> ')
         if i == 'c':
             if cart == [0, 0, 0, 0]:
                 print('商品が選ばれていません。')
@@ -31,17 +31,17 @@ def buy_process(price, buy):
         message += f'4.ごはん {cart[3]}個\n'
         total += price[3] * cart[3]
     
-    print(f'合計{total}円です')
+    print(f'合計{total}円です。')
     
     while True:
-        money = input('現金を投入してください。')
+        money = input('現金を投入してください。 >>> ')
         if not money.isdigit() or int(money) < total or int(money) < 0:
             print('金額が不足しています。')
         else:
             money = int(money)
             break
     
-    print(f'お釣り{money - total}円です。')
+    print(f'お釣り{money - total}円です。\n')
     buy[0] += cart[0]
     buy[1] += cart[1]
     buy[2] += cart[2]

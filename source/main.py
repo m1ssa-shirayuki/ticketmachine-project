@@ -2,7 +2,7 @@ price = [1000, 880, 780, 150]
 buy = [0, 0, 0, 0]
 def main():
     while True:
-        result = input('1.購入処理\n2.管理画面\n3.終了処理\n')
+        result = input('\n券売機シミュレータ\n1.購入処理\n2.管理画面\n3.終了処理\nいずれかの数字を入力してください。 >>> ')
         if not result.isdigit():
             print('数字を入力してください。')
         else:
